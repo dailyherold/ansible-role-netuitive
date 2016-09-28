@@ -1,2 +1,8 @@
 ---
-# handlers file for dailyherold.netuitive
+# handlers file for netuitive
+
+- name: Restart netuitive-agent
+  service:
+    name: netuitive-agent
+    state: restarted
+  tags: netuitive-agent

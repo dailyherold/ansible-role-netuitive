@@ -1,0 +1,22 @@
+---
+- name: Download Netuitive agent
+  win_get_url:
+    url: "{{ netuitive_windows_url }}"
+    dest: 'C:\ansible\CollectdWin-x64.msi'
+  register: netuitive_win_agent_msi
+
+- name: Install Netuitive agent
+  win_msi:
+    path: "{{ netuitive_win_agent_msi.win_get_url.dest }}"
+    state: present
+
+- name: Ensure Netuitive config file
+  win_template:
+    src: writeNetuitive.config.j2
+    dest: 'C:\Program Files\CollectdWin\config\WriteNetuitive.config'
+
+- name: Restart the CollectdWinService service
+  win_service:
+    name: CollectdWinService (64 bit)
+    start_mode: auto
+    state: restarted

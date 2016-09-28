@@ -1,2 +1,8 @@
 ---
-# tasks file for dailyherold.netuitive
+# tasks file for netuitive
+
+- include: linux.yml
+  when: ansible_system == 'Linux'
+
+- include: windows.yml
+  when: ansible_os_family == 'Windows'

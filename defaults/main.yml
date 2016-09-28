@@ -1,2 +1,5 @@
 ---
-# defaults file for dailyherold.netuitive
+# defaults file for netuitive
+
+netuitive_windows_url: https://repos.app.netuitive.com/windows-agent/51/X64/Release/CollectdWin-x64.msi 
+netuitive_rpm_key: https://s3.amazonaws.com/***REMOVED***/RPM-GPG-KEY-netuitive.dag.txt

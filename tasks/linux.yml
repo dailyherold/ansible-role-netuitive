@@ -1,0 +1,76 @@
+---
+## Flavor dependent tasks
+# RHEL
+- name: (RHEL) Add rpm key
+  rpm_key:
+    state: present
+    key: "{{ netuitive_rpm_key }}"
+  become: yes
+  tags: ["netuitive","rhel"]
+  when: ansible_os_family == "RedHat"
+
+- name: (RHEL) Add netuitive repo
+  yum:
+    state: present
+    name: https://repos.app.netuitive.com/rpm/noarch/netuitive-repo-1-0.2.noarch.rpm
+  become: yes
+  tags: ["netuitive","rhel","packages"]
+  when: ansible_os_family == "RedHat"
+
+- name: (RHEL) Install netuitive-agent
+  yum:
+    state: latest
+    update_cache: yes
+    name: netuitive-agent
+  become: yes
+  tags: ["netuitive","rhel","packages"]
+  when: ansible_os_family == "RedHat"
+
+
+# DEBIAN
+- name: (DEBIAN) Add apt key
+  apt_key:
+    state: present
+    key: https://repos.app.netuitive.com/netuitive.gpg
+  become: yes
+  tags: ["netuitive","debian"]
+  when: ansible_os_family == "Debian"
+
+- name: (DEBIAN) Install apt-transport-https
+  yum:
+    state: latest
+    name: apt-transport-https
+  become: yes
+  tags: ["netuitive","debian"]
+  when: ansible_os_family == "Debian"
+
+- name: (DEBIAN) Add netuitive.list to apt-sources
+  lineinfile:
+    state: present
+    create: yes
+    dest: /etc/apt/sources.list.d/netuitive.list
+    line: deb https://repos.app.netuitive.com/deb/ stable main
+  become: yes
+  tags: ["netuitive","debian"]
+  when: ansible_os_family == "Debian"
+
+- name: (DEBIAN) Install netuitive-agent
+  apt:
+    state: latest
+    update_cache: yes
+    name: netuitive-agent
+  become: yes
+  tags: ["netuitive","rhel","packages"]
+  when: ansible_os_family == "Debian"
+
+
+## Flavor agnotstic conf file tasks
+- name: Set netuitive agent config file
+  template:
+    src: netuitive.conf.j2
+    dest: /opt/netuitive-agent/conf/netuitive-agent.conf
+    backup: yes
+  notify: "Restart netuitive-agent"
+  become: yes
+  tags: ["netuitive","conf"]
+
