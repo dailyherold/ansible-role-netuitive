@@ -1,7 +1,7 @@
-Role Name
+Ansible Role: Netuitive Agent
 =========
 
-Ansible role to install the Netuitive agent on Linux or Windows systems
+Installs the Netuitive agent on Linux (RedHat & Debian families) or Windows systems.
 
 Requirements
 ------------
