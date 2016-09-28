@@ -1,0 +1,23 @@
+# EDITORS #
+###########
+.idea
+*.sw[a-z]
+*~
+
+# ANSIBLE #
+###########
+*.retry
+.vault_pass.txt
+
+# SCM #
+#######
+.git
+*/.git
+.gitmodules
+.gitconfig
+.gitattributes
+
+# BUILD #
+#########
+dist
+build
