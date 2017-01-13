@@ -12,7 +12,7 @@
 - name: (RHEL) Add netuitive repo
   yum:
     state: present
-    name: https://repos.app.netuitive.com/rpm/noarch/netuitive-repo-1-0.2.noarch.rpm
+    name: "{{ netuitive_rpm_repo }}"
   become: yes
   tags: ["netuitive","rhel","packages"]
   when: ansible_os_family == "RedHat"

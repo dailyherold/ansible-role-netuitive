@@ -3,6 +3,7 @@
 
 netuitive_windows_url: https://repos.app.netuitive.com/windows-agent/51/X64/Release/CollectdWin-x64.msi 
 netuitive_rpm_key: https://repos.app.netuitive.com/RPM-GPG-KEY-netuitive.txt
+netuitive_rpm_repo: https://repos.app.netuitive.com/rpm/noarch/netuitive-repo-1-0.2.noarch.rpm
 
 netuitive_api_key: ""
 netuitive_tags: "" # "tag1:val1, tag2:val2"
