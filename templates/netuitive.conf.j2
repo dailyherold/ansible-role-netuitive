@@ -53,10 +53,11 @@ keys = rotated_file
 url = https://api.app.netuitive.com/ingest/infrastructure
 
 ### Netuitive Datasource api key
-api_key = {{ netuitive.aws.linux }}
+api_key = {{ netuitive_api_key | default("") }}
 
 ### Uncomment to add tags (optional)
-tags = Environment:{{ env }}
+# tags = tag1:val1, tag2:val2
+tags = {{ netuitive_tags | default("") }}
 
 ### Uncomment to add relations
 # relations = element1, element2
@@ -196,7 +197,7 @@ args = ('/opt/netuitive-agent/log/netuitive-agent.log', 'midnight', 1, 7)
 
 [formatter_default]
 
-format = [%(asctime)s] [%(threadName)s] %(message)s
+format = [%(asctime)s] [%(threadName)s:%(processName)s:%(levelname)s] %(message)s
 datefmt =
 
 ################################################################################
